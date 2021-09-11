@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>wasm-sort-compare</title>
+    <script src="./index.js" async></script>
+  </head>
+  <style>
+    form {
+      position: sticky;
+      top: 0;
+      background-color: white;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    table, td, th {
+      border: 1px solid black;
+      padding: 0.5em;
+    }
+  </style>
+  <body>
+    <form id="form">
+      <label>Samples</label>
+      <input style="margin-bottom: 1em" type="number" min="1" max="1e7" value="1000000" id="samples">
+      <br>
+      <button style="margin-bottom: 1em" type="submit">Compare Sort Methods</button>
+    </form>
+    <table>
+      <thead>
+        <tr>
+          <th>Trial</th>
+          <th>Samples</th>
+          <th>Time JS [ms]</th>
+          <th>Time wasm [ms]</th>
+        </tr>
+      </thead>
+      <tbody id="results">
+      </tbody>
+    </table>
+  </body>
+</html>
