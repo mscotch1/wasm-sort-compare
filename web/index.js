@@ -12,7 +12,7 @@ function compare_sort_methods(
   samples
 ) {
   const method1_list = samples;
-  const method2_list = new Int32Array(samples);
+  const method2_list = Array.from(samples);
 
   const method1_time = time(() => {
     console.trace(method1(method1_list));
@@ -39,13 +39,15 @@ import("wasm-sort-compare/wasm_sort_compare").then((wasm) => {
   function run_comparison() {
     this.count = (this.count || 0) + 1;
     const num_samples = document.getElementById('samples').value;
-    const samples = new Int32Array(num_samples);
-    samples.forEach((_v, i) => samples[i] = num_samples * Math.random());
+    const samples = Array.from(
+      { length: num_samples },
+      (_n, i) => num_samples * Math.random(),
+    );
 
     const [js_time, wasm_time] = compare_sort_methods(
       (arr) => {
-        const new_arr = new Int32Array(arr);
-        new_arr.sort();
+        const new_arr = Array.from(arr);
+        new_arr.sort((a, b) => a - b);
         return new_arr;
       },
       wasm.sort,
